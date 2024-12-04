@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: muduran <muduran@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/04 19:53:46 by muduran           #+#    #+#             */
+/*   Updated: 2024/12/04 20:23:04 by muduran          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 char	*ft_get_line(char *save)
 {
-	int	i;
-    char	*s;
+	int		i;
+	char	*s;
 
 	i = 0;
 	if (!save[i])
@@ -30,8 +42,8 @@ char	*ft_get_line(char *save)
 
 char	*ft_save(char *save)
 {
-	int	i;
-	int	c;
+	int		i;
+	int		c;
 	char	*s;
 
 	i = 0;
@@ -69,6 +81,7 @@ char	*ft_read_and_save(int fd, char *save)
 		if (read_bytes == -1)
 		{
 			free(buff);
+			free(save);
 			return (NULL);
 		}
 		buff[read_bytes] = '\0';
