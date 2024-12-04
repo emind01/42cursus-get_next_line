@@ -56,35 +56,26 @@ char	*ft_save(char *save)
 
 char	*ft_read_and_save(int fd, char *save)
 {
-	char *buff;
-    int read_bytes;
-    size_t save_len;
-    size_t buff_len;
+	char	*buff;
+	int		read_bytes;
 
-    buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
-    if (!buff)
-        return (NULL);
-    read_bytes = 1;
-    save_len = ft_strlen(save);
-    while (!ft_strchr(save, '\n') && read_bytes > 0)
-    {
-        read_bytes = read(fd, buff, BUFFER_SIZE);
-        if (read_bytes == -1)
-        {
-            free(buff);
-            return (NULL);
-        }
-        buff[read_bytes] = '\0';
-        save = ft_strjoin(save, buff, save_len, read_bytes);
-        if (!save)
-        {
-            free(buff);
-            return (NULL);
-        }
-        save_len = ft_strlen(save);
-    }
-    free(buff);
-    return (save);
+	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buff)
+		return (NULL);
+	read_bytes = 1;
+	while (!ft_strchr(save, '\n') && read_bytes != 0)
+	{
+		read_bytes = read(fd, buff, BUFFER_SIZE);
+		if (read_bytes == -1)
+		{
+			free(buff);
+			return (NULL);
+		}
+		buff[read_bytes] = '\0';
+		save = ft_strjoin(save, buff);
+	}
+	free(buff);
+	return (save);
 }
 
 char	*get_next_line(int fd)
